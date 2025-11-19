@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - 404 Pharmacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #f6faff;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        /* About Section */
+        .about-section h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            color: #0d6efd;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .about-section p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-weight: 400;
+        }
+
+        /* Group Members */
+        .group-members {
+            margin-top: 60px;
+        }
+
+        .group-members h2 {
+            text-align: center;
+            font-size: 2.3rem;
+            color: #0d6efd;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* Teacher photo centered */
+        .teacher-photo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .teacher-photo {
+            position: relative; /* container relative */
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .teacher-photo img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #0d6efd;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .teacher-photo:hover img {
+            transform: scale(1.12);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Teacher info sliding from outside - ENLARGED */
+        .teacher-info {
+            position: absolute;
+            top: 50%;
+            left: -480px; /* start off left outside container */
+            transform: translateY(-50%);
+            width: 380px; /* Increased width */
+            background: rgba(255, 255, 255, 0.92);
+            color: #333;
+            padding: 25px; /* Increased padding */
+            border-radius: 15px;
+            transition: left 0.6s ease, opacity 0.6s ease;
+            opacity: 0;             /* hidden initially */
+            pointer-events: none;    /* prevent interaction when hidden */
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #0d6efd;
+        }
+
+        .teacher-photo:hover .teacher-info {
+            left: 200px;   /* slide next to teacher photo */
+            opacity: 1;
+            pointer-events: auto; /* allow interaction */
+        }
+
+        /* Tasmin Akther info styling */
+        .teacher-info h3 {
+            font-size: 1.5rem;
+            margin: 0 0 8px 0;
+            text-align: center;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .teacher-info .position {
+            font-size: 1.2rem;
+            margin: 0 0 18px 0;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .teacher-info .description {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            text-align: justify;
+            color: #444;
+            font-weight: 400;
+        }
+
+        .teacher-photo p {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0d6efd;
+        }
+
+        /* Members Row */
+        .members-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        /* Individual Member */
+        .member {
+            position: relative;
+            text-align: center;
+            width: 220px;
+        }
+
+        .member-photo {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+            overflow: visible; /* allow hover box to slide outside */
+        }
+
+        .member-photo img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #0d6efd;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-photo:hover img {
+            transform: scale(1.12);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Member info sliding like teacher */
+        .member-info {
+            position: absolute;
+            top: 50%;
+            left: -400px; /* start off left outside */
+            transform: translateY(-50%);
+            width: 380px;  /* Increased width to match teacher */
+            background: rgba(255, 255, 255, 0.92);
+            color: #333;
+            padding: 25px; /* Increased padding */
+            border-radius: 15px;
+            transition: left 0.6s ease, opacity 0.6s ease;
+            opacity: 0;             /* hidden initially */
+            pointer-events: none;    /* prevent interaction when hidden */
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #0d6efd;
+        }
+
+        /* For first two members - slide to right */
+        .member-photo.slide-right:hover .member-info {
+            left: 200px;  /* slide next to member photo */
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* For third member - slide to left */
+        .member-photo.slide-left .member-info {
+            left: 400px; /* start off right outside */
+        }
+
+        .member-photo.slide-left:hover .member-info {
+            left: -200px;  /* slide to left of member photo */
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Member info styling */
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin: 0 0 8px 0;
+            text-align: center;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .member-info .position {
+            font-size: 1.2rem;
+            margin: 0 0 18px 0;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .member-info .description {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            text-align: justify;
+            color: #444;
+            font-weight: 400;
+        }
+
+        .member p {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1>About This Page</h1>
+        <p>
+            404 Pharmacy is an innovative online pharmacy project created to make medicines and healthcare services 
+            more accessible in Bangladesh. This project was designed and implemented with focus on 
+            convenience, reliability, and a user-friendly interface for all users.
+        </p>
+        <p>
+            Our team worked collaboratively to plan, design, and develop this platform, ensuring that it meets 
+            modern standards for online healthcare services. Transparency, quality, and customer satisfaction 
+            were our top priorities.
+        </p>
+    </section>
+
+    <!-- Group Members -->
+    <section class="group-members">
+        <h2>Group Members</h2>
+
+        <!-- Teacher Photo Centered -->
+        <div class="teacher-photo-container">
+            <div class="teacher-photo">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tasmin Akther">
+                <div class="teacher-info">
+                    <h3>Tasmin Akther</h3>
+                    <p class="position">Project Supervisor</p>
+                    <p class="description">Tasmin Akther supervised the whole operation and gave us advice on how to make it better. She also monitors our progress and makes sure we are working in the right direction to achieve our goals.</p>
+                </div>
+                <p>Tasmin Akther</p>
+            </div>
+        </div>
+
+        <!-- Members Row -->
+        <div class="members-row">
+
+            <div class="member">
+                <div class="member-photo slide-right">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Safatul Islam">
+                    <div class="member-info">
+                        <h3>Safatul Islam</h3>
+                        <p class="position">Project Manager and Lead Developer</p>
+                        <p class="description">Safatul Islam made the blueprint of the website and handled most of the operations as well as guiding others. He also ensured that every phase of project was completed on time and met the required quality standards.</p>
+                    </div>
+                </div>
+                <p>Safatul Islam</p>
+            </div>
+
+            <div class="member">
+                <div class="member-photo slide-right">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Ali Hosain">
+                    <div class="member-info">
+                        <h3>Ali Hosain</h3>
+                        <p class="position">Front End and Back End Developer</p>
+                        <p class="description">Ali worked on the front end and back end of the website. He developed and managed the server, database and application logic. He also designed and built the visible part of the website that users interact with.</p>
+                    </div>
+                </div>
+                <p>Ali Hosain</p>
+            </div>
+
+            <div class="member">
+                <div class="member-photo slide-left">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Tareq Rahman">
+                    <div class="member-info">
+                        <h3>Tareq Rahman</h3>
+                        <p class="position">Front End Developer</p>
+                        <p class="description">Tareq specializes in UI and designing of the website. He made sure that the website looked attractive, worked perfectly across all devices, and provided a smooth and engaging user experience.</p>
+                    </div>
+                </div>
+                <p>Tareq Rahman</p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
